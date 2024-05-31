@@ -1,6 +1,6 @@
 ﻿#include <iostream>
 #include "SeparateChaining.h"
-
+#include "CuckooHashing.h"
 using namespace std;
 
 int main()
@@ -20,6 +20,24 @@ int main()
     std::cout << "Table after deletion:" << std::endl;
     ht.printTable();*/
 
+    CuckooHash ht1;
+    for (int i = 0; i < 72; i++) {
+        ht1.insert(i, i + 100);
+    }
+
+    ht1.printTab();
+    cout << ht1.find(10) << endl;
+    ht1.printTab();
+    cout << "Value for key 2: " << ht1.find(2) << endl;
+    cout << "Value for key 4: " << ht1.find(4) << endl;
+
+    ht1.remove(2);
+    ht1.insert(10, 100);
+
+    cout << "Table after deletion:" << endl;
+    cout << ht1.find(10) << endl;
+
+    ht1.printTab();
     return 0;
 }
 
