@@ -1,6 +1,10 @@
 #pragma once
 #include <iostream>
+#include "KeyValuePair.h"
 using namespace std;
+
+
+
 template<typename T>
 class ArrayList
 {
@@ -121,6 +125,26 @@ public:
     T& getElement(int index) {                           //method returns element by index
         return tab[index];
     };
+
+    void expand(T value) {
+        int oldCapacity = capacity;
+        capacity *= 2;
+        T* newTab = new T[capacity];
+        for (int i = 0; i < capacity; i++) {
+            newTab[i] = value;
+        }
+        for (int i = 0; i < oldCapacity; i++) {
+            newTab[i] = tab[i];
+        }
+        delete[] tab;
+        tab = newTab;
+    }
+
+    void fill(T value) {
+        for (int i = 0; i < capacity; i++) {
+            tab[i] = value;
+        }
+    }
 
     int findElement(T element) const {                  //method searches for element and returns its index or -1 if not found
         for (int i = 0; i < size; ++i) {

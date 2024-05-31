@@ -1,16 +1,12 @@
 #pragma once
 #include <iostream>
 #include "ArrayList.h"
+#include "KeyValuePair.h"
 
 using namespace std;
 
 class CuckooHash {
 private:
-    struct KeyValuePair {
-        int key;
-        int value;
-    };
-
     ArrayList<KeyValuePair>* tab1;
     ArrayList<KeyValuePair>* tab2;
     int currSize = 100;

@@ -129,12 +129,18 @@
   <ItemGroup>
     <ClCompile Include="ArrayList.cpp" />
     <ClCompile Include="CuckooHashing.cpp" />
+    <ClCompile Include="HashBST.cpp" />
+    <ClCompile Include="KeyValuePair.cpp" />
+    <ClCompile Include="ListBST.cpp" />
     <ClCompile Include="SeparateChaining.cpp" />
     <ClCompile Include="Struktury_danych_3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArrayList.h" />
     <ClInclude Include="CuckooHashing.h" />
+    <ClInclude Include="HashBST.h" />
+    <ClInclude Include="KeyValuePair.h" />
+    <ClInclude Include="ListBST.h" />
     <ClInclude Include="SeparateChaining.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
