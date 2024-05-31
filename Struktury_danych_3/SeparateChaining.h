@@ -1,13 +1,12 @@
+#pragma once
 #include <iostream>
 #include <vector>
 #include "ArrayList.h"
+#include "KeyValuePair.h"
 
 class SeparateChaining {
 private:
-    struct KeyValuePair {
-        int key;
-        int value;
-    };
+    
 
     ArrayList<KeyValuePair>* table;
     int currentSize=100;
