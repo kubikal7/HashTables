@@ -108,6 +108,10 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <StackReserveSize>
+      </StackReserveSize>
+      <StackCommitSize>
+      </StackCommitSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -129,18 +133,22 @@
   <ItemGroup>
     <ClCompile Include="ArrayList.cpp" />
     <ClCompile Include="CuckooHashing.cpp" />
+    <ClCompile Include="Hash.cpp" />
     <ClCompile Include="HashBST.cpp" />
     <ClCompile Include="KeyValuePair.cpp" />
     <ClCompile Include="ListBST.cpp" />
+    <ClCompile Include="Scanner.cpp" />
     <ClCompile Include="SeparateChaining.cpp" />
     <ClCompile Include="Struktury_danych_3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArrayList.h" />
     <ClInclude Include="CuckooHashing.h" />
+    <ClInclude Include="Hash.h" />
     <ClInclude Include="HashBST.h" />
     <ClInclude Include="KeyValuePair.h" />
     <ClInclude Include="ListBST.h" />
+    <ClInclude Include="Scanner.h" />
     <ClInclude Include="SeparateChaining.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
