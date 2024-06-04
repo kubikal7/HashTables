@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "KeyValuePair.h"
+#include "Hash.h"
 
 struct TreeNode {
     KeyValuePair data;
@@ -12,7 +13,7 @@ struct TreeNode {
 };
 
 
-class ListBST {
+class ListBST : public Hash {
 private:
     TreeNode* root;
 
@@ -24,33 +25,33 @@ private:
     }
 
     void removeNode(TreeNode* node) {
-        if (node->left == nullptr && node->right == nullptr) {
+        if (node->left == nullptr && node->right == nullptr) {                      //check if node doesn't have children
             if (node->parent == nullptr) {
                 root = nullptr;
             }
-            else if (node == node->parent->left) {
+            else if (node == node->parent->left) {                                  //if node is left child
                 node->parent->left = nullptr;
             }
-            else {
+            else {                                                                  //if node is right child
                 node->parent->right = nullptr;
             }
             delete node;
         }
-        else if (node->left != nullptr && node->right != nullptr) {
+        else if (node->left != nullptr && node->right != nullptr) {                 //check if node has children
             TreeNode* minNode = findMin(node->right);
             node->data = minNode->data;
             removeNode(minNode);
         }
-        else {
-            TreeNode* child = (node->left != nullptr) ? node->left : node->right;
+        else {                                                                      //if node has one child
+            TreeNode* child = (node->left != nullptr) ? node->left : node->right;       
             if (node->parent == nullptr) {
                 root = child;
             }
-            else if (node == node->parent->left) {
+            else if (node == node->parent->left) {                                  //if node is left child
                 node->parent->left = child;
             }
             else {
-                node->parent->right = child;
+                node->parent->right = child;                                        //if node is right child
             }
             child->parent = node->parent;
             delete node;
@@ -79,25 +80,25 @@ public:
 
     void insert(int key, int value) {
         TreeNode* newNode = new TreeNode(key, value);
-        if (root == nullptr) {
+        if (root == nullptr) {                              //if list is empty
             root = newNode;
             return;
         }
 
         TreeNode* current = root;
         TreeNode* parent = nullptr;
-        while (current != nullptr) {
+        while (current != nullptr) {                        //looking for place
             parent = current;
-            if (key < current->data.key) {
+            if (key < current->data.key) {                  //if key is less than node go to left
                 current = current->left;
             }
             else {
-                current = current->right;
+                current = current->right;                   //if key is bigger than node go to right
             }
         }
 
-        newNode->parent = parent;
-        if (key < parent->data.key) {
+        newNode->parent = parent;                    
+        if (key < parent->data.key) {                        //insert node
             parent->left = newNode;
         }
         else {
@@ -107,7 +108,7 @@ public:
 
     int find(int key) {
         TreeNode* current = root;
-        while (current != nullptr) {
+        while (current != nullptr) {                        //looking for node
             if (key == current->data.key) {
                 return current->data.value;
             }
@@ -118,12 +119,12 @@ public:
                 current = current->right;
             }
         }
-        return -1; // Nie znaleziono wartoœci
+        return -1;                                          //element not found
     }
 
     void remove(int key) {
         TreeNode* current = root;
-        while (current != nullptr) {
+        while (current != nullptr) {                        //looking for node
             if (key == current->data.key) {
                 removeNode(current);
                 return;
@@ -138,10 +139,10 @@ public:
     }
 
     TreeNode* getRoot() const {
-        return root;
+        return root;                                        //get pointer to first (top) element in list
     }
 
-    void printTree() {
+    void printTable() {
         printTree(root, 0);
     }
     

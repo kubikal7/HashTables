@@ -12,7 +12,7 @@ private:
 
     void rehash() {
         int oldSize = currentSize;
-        currentSize *= 2; // Nowy rozmiar jest podwójny
+        currentSize *= 2;                                                           //new doubled size
         ListBST* newTable = new ListBST[currentSize];
 
         for (int i = 0; i < oldSize; i++) {
@@ -23,19 +23,16 @@ private:
         table = newTable;
     }
 
-    // Pomocnicza metoda do przechodzenia przez BST i ponownego hashowania
     void rehashTree(ListBST* newTable, TreeNode* node) {
-        if (node == nullptr) return;
+        if (node == nullptr) return;                                                //if list is empty
 
-        // Oblicz nowy indeks w nowej tablicy
-        int newIndex = hash(node->data.key, currentSize);
+        int newIndex = hash(node->data.key, currentSize);                           //calculate new index
 
         // Wstaw dane w nowej tablicy
         newTable[newIndex].insert(node->data.key, node->data.value);
 
-        // Rekurencyjne przechodzenie przez lewe i prawe poddrzewo
-        rehashTree(newTable, node->left);
-        rehashTree(newTable, node->right);
+        rehashTree(newTable, node->left);                                           //going by left side of tree
+        rehashTree(newTable, node->right);                                          //going by right side of tree
     }
 
     int hash(int key, int size) {
@@ -53,7 +50,7 @@ public:
 
     void insert(int key, int value) {
         float currentLoadFactor = static_cast<float>(numElements) / currentSize;
-        if (currentLoadFactor > loadFactorThreshold) {
+        if (currentLoadFactor > loadFactorThreshold) {                              //if load factor is bigger than 0.7 rehash 
             rehash();
         }
         int index = hash(key, currentSize);
@@ -74,7 +71,7 @@ public:
     void printTable() {
         for (int i = 0; i < currentSize; ++i) {
             std::cout << "Index " << i<<":"<<endl;
-            table[i].printTree();
+            table[i].printTable();
             std::cout << "NULL" << std::endl;
         }
     }

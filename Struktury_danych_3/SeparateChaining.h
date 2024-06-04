@@ -3,11 +3,10 @@
 #include <vector>
 #include "ArrayList.h"
 #include "KeyValuePair.h"
+#include "Hash.h"
 
-class SeparateChaining {
+class SeparateChaining : public Hash{
 private:
-    
-
     ArrayList<KeyValuePair>* table;
     int currentSize=100;
     int numElements=0;
@@ -18,7 +17,7 @@ private:
         currentSize *= 2; // New size is doubled
         ArrayList<KeyValuePair>* newTable = new ArrayList<KeyValuePair>[currentSize];
 
-        for (int i = 0; i < oldSize; i++) {
+        for (int i = 0; i < oldSize; i++) {                                         //rewrite elements to bigger table
             int sizeBucket = table[i].getSize();
             for (int j = 0;j < sizeBucket;j++) {
                 KeyValuePair pair = table[i].getElement(j);
@@ -31,7 +30,7 @@ private:
         table = newTable;
     }
 
-    int hash(int key, int size) {
+    int hash(int key, int size) {                                                   //hash function
         return key % size;
     }
 
@@ -46,7 +45,7 @@ public:
 
     void insert(int key, int value) {
         float currentLoadFactor = static_cast<float>(numElements) / currentSize;
-        if (currentLoadFactor > loadFactorThreshold) {
+        if (currentLoadFactor > loadFactorThreshold) {                              //if load factor is bigger than 0.7 rehash table
             rehash();
         }
         int index = hash(key, currentSize);
@@ -57,25 +56,25 @@ public:
     int find(int key) {
         int index = hash(key, currentSize);
         int sizeBucket = table[index].getSize();
-        for (int j = 0;j < sizeBucket;j++) {
+        for (int j = 0;j < sizeBucket;j++) {                                    //looking for element in table under specific index
             KeyValuePair pair = table[index].getElement(j);
             if (pair.key == key) {
                 return pair.value;
             }
         }
-        // Return default value if key not found
+                                                                                 // Return default value if key not found
         return -1;
     }
 
     void remove(int key) {
         int index = hash(key, currentSize);
         int sizeBucket = table[index].getSize();
-        for (int j = 0;j < sizeBucket;j++) {
+        for (int j = 0;j < sizeBucket;j++) {                                    //looking for element in table under specific index
             KeyValuePair pair = table[index].getElement(j);
             if (pair.key == key) {
                 table[index].deleteElement(j);
                 numElements--;
-                break; // Stop after first occurrence of key
+                break;                                                          // Stop after first occurrence of key
             }
         }
     }
